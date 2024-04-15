@@ -5,8 +5,8 @@ from keras.models import load_model
 # Load the pre-trained model
 model = load_model('CNNmodel.h5')
 
-def prediction(pred):
-    return chr(pred + 65)
+# Define a dictionary to map predicted class indices to corresponding characters
+class_mapping = {i: chr(i + 65) for i in range(26)}
 
 def keras_predict(model, image):
     data = np.asarray(image, dtype="int32")
@@ -40,21 +40,17 @@ def main():
 
         # Make prediction
         pred_probab, pred_class = keras_predict(model, preprocessed_image)
-        curr = prediction(pred_class)
+        predicted_char = class_mapping[pred_class]
 
-        # Display only the processed ROI with prediction text
-        cv2.putText(roi, curr, (50, 50),
-                    cv2.FONT_HERSHEY_COMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
+        # Display the processed ROI with prediction text
+        cv2.putText(roi, predicted_char, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
         cv2.imshow("Processed ROI", roi)
 
         # Check for user input to exit
-        if cv2.waitKey(25) & 0xFF == ord('q'):
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            cam_capture.release()
             cv2.destroyAllWindows()
             break
-
-    # Release the webcam and close all windows
-    cam_capture.release()
-    cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     main()
