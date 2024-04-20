@@ -3,6 +3,9 @@
 ## Overview
 
 This project presents Gesture2Text, a real-time sign language translation system that utilizes deep learning to bridge communication gaps between the deaf and hearing communities. It harnesses the power of convolutional neural networks to recognize hand gestures from webcam input and translate them into corresponding text, fostering seamless and inclusive communication.
+<p align="center">
+  <img src="https://github.com/sharathkumaar-sk/Gesture2Text/assets/163333516/d728d1e0-98f0-4690-9c34-35a24f9b72e6"/>
+</p>
 
 ## Key Features
 
